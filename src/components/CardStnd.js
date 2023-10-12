@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Card, Dropdown, Button } from 'react-bootstrap';
+import { Card, Dropdown, Button, Image } from 'react-bootstrap';
 
 const CardStnd = () => {
   const { id } = useParams();
@@ -33,33 +33,33 @@ const CardStnd = () => {
   }
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={character.image} />
+    <Card style={{ width: '18rem' }} className="align-items-center">
+      <Image  src={character.image} roundedCircle style={{width:'50%'}}/>
       <Card.Body>
         <Card.Title>{character.name}</Card.Title>
         <Card.Text>
           {character.status} | {character.species} | {character.gender}
         </Card.Text>
         <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="location-dropdown">
+          <Dropdown.Toggle variant="none" id="location-dropdown" style={{color:'black', fontWeight:'bold'}}>
             Location
           </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item>{character.location.name}</Dropdown.Item>
+          <Dropdown.Menu style={{border:'#0D6EFD solid 1px'}}>
+            <Dropdown.Item style={{color:'grey'}}>{character.location.name}</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <Dropdown>
-          <Dropdown.Toggle variant="secondary" id="episode-dropdown">
+          <Dropdown.Toggle variant="none" id="episode-dropdown" style={{color:'black', fontWeight:'bold'}}>
             Episodes
           </Dropdown.Toggle>
-          <Dropdown.Menu>
+          <Dropdown.Menu style={{border:'#0D6EFD solid 1px'}}>
             {character.episode.map((episode, index) => (
-              <Dropdown.Item key={index}>{episode}</Dropdown.Item>
+              <Dropdown.Item style={{color:'grey'}} key={index}>{episode}</Dropdown.Item>
             ))}
           </Dropdown.Menu>
         </Dropdown>
         <Button variant="primary" onClick={handleGoToCatalog}>
-          Go to Catalog
+          Back
         </Button>
       </Card.Body>
     </Card>
