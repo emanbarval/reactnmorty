@@ -15,11 +15,9 @@ const Catalog = () => {
         `https://rickandmortyapi.com/api/character?page=${page}`
       );
       if (page === 1) {
-        // Verificar si ya existen personajes en el estado characters
         const existingCharacters = characters.filter(
           character => character.page !== 1
         );
-
         setCharacters([
           ...existingCharacters,
           ...response.data.results.map(character => ({
@@ -39,13 +37,15 @@ const Catalog = () => {
     };
 
     fetchCharacters();
-  }, [page]);
+  }, [page, charNumber]);
 
   const loadMore = () => {
-    if (charNumber+8 >= 20) {
+    if (charNumber + 8 >= 20) {
       setPage(prevPage => prevPage + 1);
+      setCharNumber(0);
+    } else {
+      setCharNumber(charNumber + 8);
     }
-    setCharNumber(charNumber + 8);
   };
 
   const handleFilterStatus = (status) => {
@@ -54,9 +54,9 @@ const Catalog = () => {
 
   const filteredCharacters = characters.filter(character => {
     if (filterStatus === '') {
-      return true; // Mostrar todos los personajes si no hay filtro aplicado
+      return true;
     } else {
-      return character.status === filterStatus; // Filtrar por estado seleccionado
+      return character.status === filterStatus;
     }
   });
 
@@ -64,11 +64,42 @@ const Catalog = () => {
 
   return (
     <Container>
+      <Container className="d-flex justify-content-center">
+        <div>
+          <div>
+            <button
+              className={filterStatus === "" ? "active" : ""}
+              onClick={() => handleFilterStatus("")}
+            >
+              All
+            </button>
+            <button
+              className={filterStatus === "Alive" ? "active" : ""}
+              onClick={() => handleFilterStatus("Alive")}
+            >
+              Alive
+            </button>
+            <button
+              className={filterStatus === "Dead" ? "active" : ""}
+              onClick={() => handleFilterStatus("Dead")}
+            >
+              Dead
+            </button>
+            <button
+              className={filterStatus === "unknown" ? "active" : ""}
+              onClick={() => handleFilterStatus("unknown")}
+            >
+              Unknown
+            </button>
+          </div>
+        </div>
+      </Container>
       <Container className="d-flex align-items-center">
         <Row xs={1} md={2} lg={4} className="g-4">
           {showCharacters.map(character => (
             <Col key={character.id}>
               <CardCat
+                id={character.id}
                 name={character.name}
                 image={character.image}
                 status={character.status}
@@ -80,15 +111,6 @@ const Catalog = () => {
         </Row>
       </Container>
       <Container className="d-flex justify-content-center">
-        <div>
-          <label htmlFor="filterStatus">Filter by Status:</label>
-          <select id="filterStatus" value={filterStatus} onChange={(e) => handleFilterStatus(e.target.value)}>
-            <option value="">All</option>
-            <option value="Alive">Alive</option>
-            <option value="Dead">Dead</option>
-            <option value="unknown">Unknown</option>
-          </select>
-        </div>
         {characters.length > 0 && showCharacters.length < characters.length && (
           <button onClick={loadMore}>Load More</button>
         )}
