@@ -6,6 +6,8 @@ import Catalog from "./components/Catalog";
 import CardStnd from "./components/CardStnd";
 import { Route, Routes } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+
 
 const App = () => {
   return (
@@ -16,7 +18,7 @@ const App = () => {
       <h1 className="text-center">Rick & Morty</h1>
       <Catalog />
     </div>}/>
-    <Route path="/profile/:id" element={<CardStnd />} />
+    <Route path="/profile/:id" element={<Container className="d-flex flex-column min-vh-100 justify-content-center align-items-center"><CardStnd /></Container> }/>
     </Routes>
     </BrowserRouter>
   );
