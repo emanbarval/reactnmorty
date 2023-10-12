@@ -37,16 +37,14 @@ const Catalog = () => {
     };
 
     fetchCharacters();
-  }, [page, charNumber]);
+}, [page]);
 
-  const loadMore = () => {
-    if (charNumber + 8 >= 20) {
-      setPage(prevPage => prevPage + 1);
-      setCharNumber(0);
-    } else {
-      setCharNumber(charNumber + 8);
-    }
-  };
+const loadMore = () => {
+  if (charNumber+8 >= 20) {
+    setPage(prevPage => prevPage + 1);
+  }
+  setCharNumber(charNumber + 8);
+};
 
   const handleFilterStatus = (status) => {
     setFilterStatus(status);
