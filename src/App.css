@@ -36,3 +36,25 @@
     transform: rotate(360deg);
   }
 }
+
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+*
+{
+  font-family: 'Poppins';
+}
+
+.alive
+{
+  color: #48DE96;
+}
+
+.dead
+{
+  color:#FB7181;
+}
+
+.unknown
+{
+  color:#48BADE;
+}
