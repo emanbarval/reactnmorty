@@ -31,14 +31,28 @@ const CardStnd = () => {
   if (!character) {
     return <div>Loading...</div>;
   }
-
+  let status;
+  if(character.status === 'Alive')
+  {
+    status = <span className='alive'>{character.status}</span>;
+  }
+  else if(character.status === 'Dead')
+  {
+    status = <span className='dead'>{character.status}</span>;
+  }
+  else if(character.status === 'unknown')
+  {
+    status = (character.status[0].toUpperCase() + character.status.slice(1));
+    status = <span className='unknown'>{status}</span>;
+  }
+  console.log(status)
   return (
     <Card style={{ width: '18rem' }} className="align-items-center">
       <Image  src={character.image} roundedCircle style={{width:'50%'}}/>
       <Card.Body>
         <Card.Title>{character.name}</Card.Title>
         <Card.Text>
-          {character.status} | {character.species} | {character.gender}
+          {status} | {character.species} | {character.gender}
         </Card.Text>
         <Dropdown>
           <Dropdown.Toggle variant="none" id="location-dropdown" style={{color:'black', fontWeight:'bold'}}>
