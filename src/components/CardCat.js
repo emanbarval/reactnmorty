@@ -19,9 +19,9 @@ function CardCat({id, name, image, status, species, gender}) {
   }
   return (
     
-    <Link to={`/profile/${id}`}>
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={image} />
+    <Link to={`/profile/${id}`} style={{textDecoration:'none'}}>
+    <Card style={{ width: '298px', height:'385px' }}>
+      <Card.Img variant="top" src={image}  style={{ width: '298px', height:'272.5px' }}/>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Text>

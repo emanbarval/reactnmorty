@@ -40,12 +40,13 @@ const Catalog = () => {
   }, [page, charNumber]);
 
   const loadMore = () => {
-    if (charNumber + 8 >= 20) {
+    /*if (charNumber + 8 >= 20) {
       setPage(prevPage => prevPage + 1);
       setCharNumber(0);
     } else {
       setCharNumber(charNumber + 8);
-    }
+    }*/
+    setPage(prevPage => prevPage + 1);
   };
 
   const handleFilterStatus = (status) => {
